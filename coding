@@ -1,0 +1,563 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?fit=crop&w=1470&q=80') no-repeat center center/cover;
+  min-height: 100vh;
+  color: #fff;
+}
+
+/* Start Page */
+.start-container {
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 1.2rem;
+}
+
+.start-container input,
+.start-container select {
+  padding: 10px;
+  width: 250px;
+  border-radius: 8px;
+  border: none;
+}
+
+.start-container button {
+  padding: 10px 25px;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: #28a745;
+  color: white;
+  transition: 0.3s;
+}
+
+.start-container button:hover {
+  background-color: #218838;
+  transform: scale(1.05);
+}
+
+/* Main Quiz Page */
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+}
+
+/* Progress Bar Soal */
+.progress-container {
+  width: 90%;
+  background-color: #ddd;
+  height: 10px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+
+#progress-bar {
+  height: 100%;
+  width: 0;
+  background-color: #28a745;
+  transition: width 0.4s ease;
+}
+
+/* Timer Text */
+.timer-container {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: #007bff;
+  background: #ffffffcc;
+  padding: 10px 20px;
+  border-radius: 10px;
+  transition: color 0.3s ease;
+}
+
+/* Timer Progress Bar */
+.timer-progress-container {
+  width: 90%;
+  background-color: #ddd;
+  height: 8px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+
+#timer-bar {
+  height: 100%;
+  width: 100%;
+  background-color: #dc3545;
+  transition: width 1s linear;
+}
+
+/* Quiz Box */
+.game-quiz-container {
+  background: rgba(255, 255, 255, 0.9);
+  color: #333;
+  padding: 25px;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 600px;
+  text-align: center;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+
+.game-details-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.game-question-container h1 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  animation: fadeInUp 0.5s ease;
+}
+
+.game-options-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 20px;
+  animation: fadeInUp 0.5s ease;
+}
+
+span {
+  width: 45%;
+}
+
+span label {
+  display: block;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  padding: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+span label:hover {
+  background-color: #eee;
+}
+
+.next-button-container {
+  display: flex;
+  justify-content: center;
+}
+
+.next-button-container button {
+  padding: 10px 25px;
+  font-size: 1rem;
+  border: 2px solid gray;
+  border-radius: 10px;
+  background: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.next-button-container button:hover {
+  background-color: gray;
+  color: white;
+}
+
+/* Modal Skor */
+.modal-container {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content-container {
+  background: white;
+  color: #333;
+  padding: 30px;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.grade-details p {
+  margin: 10px 0;
+}
+
+/* Modal Button */
+.modal-button-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 20px;
+  gap: 10px;
+}
+
+.modal-button-container button {
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* Tombol Main Lagi */
+.modal-button-container button:nth-child(1) {
+  background: #28a745;
+  color: white;
+}
+
+.modal-button-container button:nth-child(1):hover {
+  background: #218838;
+  transform: scale(1.05);
+}
+
+/* Tombol Menu Awal */
+.modal-button-container button:nth-child(2) {
+  background: #007bff;
+  color: white;
+}
+
+.modal-button-container button:nth-child(2):hover {
+  background: #0056b3;
+  transform: scale(1.05);
+}
+
+/* Animasi FadeInUp */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>QUIZ UNTUK MENINGKATKAN PEMAHAMAN MATA PELAJARAN IPA KELAS 8 BERBASIS WEB</title>
+    <link rel="stylesheet" href="index.css" />    
+  </head>
+  <body>
+    <!-- Start Page -->
+    <div class="start-container" id="start-page">
+      <h1>Selamat Datang di Quiz untuk meningkatkan pemahaman mata pelajaran IPA berbasis web</h1>
+      <input type="text" id="player-name" placeholder="Masukkan Nama Kamu" />
+      <select id="question-count">
+        <option value="10">10 Soal</option>
+        <option value="15" selected>15 Soal</option>
+        <option value="20">20 Soal</option>
+      </select>
+      <button onclick="startQuiz()">Mulai</button>
+    </div>
+
+    <!-- Quiz Page -->
+    <main id="quiz-container" style="display: none">
+      <div class="progress-container">
+        <div id="progress-bar"></div>
+      </div>
+
+      <div class="timer-container"><span id="timer">15</span> detik</div>
+      <div class="timer-progress-container">
+        <div id="timer-bar"></div>
+      </div>
+
+      <div class="game-quiz-container">
+        <div class="game-details-container">
+          <h3 id="player-display">Pemain:</h3>
+          <h3>Skor: <span id="player-score">0</span></h3>
+          <h3>Soal ke-<span id="question-number">1</span></h3>
+        </div>
+        <div class="game-question-container">
+          <h1 id="display-question">Soal akan tampil di sini</h1>
+        </div>
+        <div class="game-options-container">
+          <span><input type="radio" name="option" id="option-one" value="optionA" onclick="selectOption('optionA')" /><label for="option-one" id="option-one-label">A</label></span>
+          <span><input type="radio" name="option" id="option-two" value="optionB" onclick="selectOption('optionB')" /><label for="option-two" id="option-two-label">B</label></span>
+          <span><input type="radio" name="option" id="option-three" value="optionC" onclick="selectOption('optionC')" /><label for="option-three" id="option-three-label">C</label></span>
+          <span><input type="radio" name="option" id="option-four" value="optionD" onclick="selectOption('optionD')" /><label for="option-four" id="option-four-label">D</label></span>
+        </div>
+        <div class="next-button-container">
+          <button onclick="handleNextQuestion()">Selanjutnya</button>
+        </div>
+      </div>
+    </main>
+
+    <!-- Score Modal -->
+    <div class="modal-container" id="score-modal">
+      <div class="modal-content-container">
+        <h1>Hasil Kuis</h1>
+        <p id="display-name">Pemain: -</p>
+        <div class="grade-details">
+          <p>Benar: <span id="right-answers">0</span></p>
+          <p>Salah: <span id="wrong-answers">0</span></p>
+          <p>Nilai: <span id="grade-percentage">0</span>%</p>
+          <p id="remarks">Penilaian</p>
+        </div>
+        <div class="modal-button-container">
+          <button onclick="restartQuiz()">Main Lagi</button>
+          <button onclick="goToMenu()">Menu Awal</button>
+        </div>
+      </div>
+    </div>
+
+    <audio id="beep-sound" src="https://www.soundjay.com/button/beep-07.wav" preload="auto"></audio>
+    <audio id="background-music" src="https://www.bensound.com/bensound-music/bensound-sunny.mp3" autoplay loop></audio>
+
+    <script src="index.js"></script>
+  </body>
+</html>
+
+// Soal-soal Quiz
+const questions = [
+  { question: "Perubahan zat dari padat menjadi gas disebut?", optionA: "Mencair", optionB: "Membeku", optionC: "Menguap", optionD: " Menyublim", correctOption: "optionD" },
+  { question: "Rumus kimia air adalah?", optionA: "CO₂", optionB: "O₂", optionC: "NaCl", optionD: "H₂O", correctOption: "optionD" },
+  { question: "Proses perubahan dari padat ke cair disebut?", optionA: "Menguap", optionB: "Membeku", optionC: "Mencair", optionD: "Mengembun", correctOption: "optionC" },
+  { question: "Planet dengan cincin paling terlihat?", optionA: "Mars", optionB: "Saturnus", optionC: "Jupiter", optionD: "Venus", correctOption: "optionB" },
+  { question: "Bagian sel yang mengatur aktivitas sel?", optionA: "Sitoplasma", optionB: "Nukleus", optionC: "Ribosom", optionD: "Dinding sel", correctOption: "optionB" },
+  { question: "Gas terbanyak di atmosfer bumi?", optionA: "Oksigen", optionB: "Nitrogen", optionC: "Karbon Dioksida", optionD: "Hidrogen", correctOption: "optionB" },
+  { question: "Alat optik untuk melihat benda kecil?", optionA: "Mikroskop", optionB: "Teleskop", optionC: "Lensa", optionD: "Kamera", correctOption: "optionA" },
+  { question: "Gaya yang menyebabkan benda jatuh?", optionA: "Gaya otot", optionB: "Gaya gravitasi", optionC: "Gaya gesek", optionD: "Gaya dorong", correctOption: "optionB" },
+  { question: "Lapisan atmosfer tempat cuaca terjadi?", optionA: "Stratosfer", optionB: "Mesosfer", optionC: "Troposfer", optionD: "Termosfer", correctOption: "optionC" },
+  { question: "Planet terbesar dalam tata surya?", optionA: "Mars", optionB: "Venus", optionC: "Saturnus", optionD: "Jupiter", correctOption: "optionD" },
+  { question: "Organ pernapasan manusia?", optionA: "Jantung", optionB: "Paru-paru", optionC: "Lambung", optionD: "Hati", correctOption: "optionB" },
+  { question: "Bunyi dapat merambat melalui?", optionA: "Cahaya", optionB: "Ruang hampa", optionC: "Medium", optionD: "Udara", correctOption: "optionC" },
+  { question: "Membakar sampah termasuk perubahan?", optionA: "Fisika", optionB: "Kimia", optionC: "Mekanik", optionD: "Biologi", correctOption: "optionB" }, // fixed correctOption case
+  { question: "Sumber energi dari angin disebut?", optionA: "Energi Surya", optionB: "Energi Angin", optionC: "Biomassa", optionD: "Panas Bumi", correctOption: "optionB" },
+  { question: "Apa lambang unsur Oksigen?", optionA: "O", optionB: "Ox", optionC: "O₂", optionD: "Ox₂", correctOption: "optionA" },
+  { question: "Satuan arus listrik adalah?", optionA: "Volt", optionB: "Ampere", optionC: "Ohm", optionD: "Watt", correctOption: "optionB" },
+  { question: "Jenis energi untuk menyalakan TV?", optionA: "Energi Cahaya", optionB: "Energi Kimia", optionC: "Energi Listrik", optionD: "Energi Mekanik", correctOption: "optionC" },
+  { question: "Apa ibu kota Indonesia?", optionA: "Bandung", optionB: "Surabaya", optionC: "Jakarta", optionD: "Medan", correctOption: "optionC" },
+  { question: "Penemu lampu pijar?", optionA: "Isaac Newton", optionB: "Thomas Edison", optionC: "Albert Einstein", optionD: "Galileo", correctOption: "optionB" }
+];
+
+let shuffledQuestions = [];
+let playerName = "";
+let selectedQuestionCount = 10;
+let questionNumber = 1;
+let playerScore = 0; // sekarang dihitung poin total
+let wrongAttempt = 0;
+let indexNumber = 0;
+let timerInterval;
+let timerValue = 15;
+let answered = false;
+const scorePerQuestion = 10; // skor tiap soal benar
+
+// Audio background music
+const bgMusic = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3');
+bgMusic.loop = true;
+
+function startQuiz() {
+  const nameInput = document.getElementById("player-name").value.trim();
+  if (nameInput === "") {
+    alert("Masukkan nama kamu dulu!");
+    return;
+  }
+  playerName = nameInput;
+  selectedQuestionCount = parseInt(document.getElementById("question-count").value);
+
+  document.getElementById("start-page").style.display = "none";
+  document.getElementById("quiz-container").style.display = "flex";
+  document.getElementById("player-display").innerText = `Pemain: ${playerName}`;
+
+  bgMusic.play();
+
+  handleQuestions();
+  NextQuestion(indexNumber);
+}
+
+function handleQuestions() {
+  shuffledQuestions = questions.sort(() => Math.random() - 0.5).slice(0, selectedQuestionCount);
+}
+
+function NextQuestion(index) {
+  resetTimer();
+  startTimer();
+
+  const currentQuestion = shuffledQuestions[index];
+  document.getElementById("question-number").innerText = questionNumber;
+  document.getElementById("player-score").innerText = playerScore;
+  document.getElementById("display-question").innerText = currentQuestion.question;
+  document.getElementById("option-one-label").innerText = currentQuestion.optionA;
+  document.getElementById("option-two-label").innerText = currentQuestion.optionB;
+  document.getElementById("option-three-label").innerText = currentQuestion.optionC;
+  document.getElementById("option-four-label").innerText = currentQuestion.optionD;
+
+  const progressWidth = ((questionNumber - 1) / selectedQuestionCount) * 100;
+  document.getElementById("progress-bar").style.width = `${progressWidth}%`;
+}
+
+function selectOption(optionValue) {
+  if (answered) return;
+  checkForAnswer(optionValue);
+}
+
+function checkForAnswer(selectedOption) {
+  clearInterval(timerInterval);
+
+  const currentQuestion = shuffledQuestions[indexNumber];
+  const correctAnswer = currentQuestion.correctOption;
+  const options = document.getElementsByName("option");
+
+  options.forEach((option) => {
+    const label = option.labels[0];
+    if (option.value === correctAnswer) {
+      label.style.backgroundColor = "green";
+    }
+    if (option.checked && option.value !== correctAnswer) {
+      label.style.backgroundColor = "red";
+    }
+  });
+
+  if (selectedOption === correctAnswer) {
+    playerScore += scorePerQuestion; // tambah poin per soal benar
+  } else {
+    wrongAttempt++;
+  }
+
+  answered = true;
+  indexNumber++;
+  questionNumber++;
+}
+
+function handleNextQuestion() {
+  if (!answered) {
+    // Waktu tetap jalan, tapi tidak lanjut soal kalau belum dijawab
+    return;
+  }
+
+  resetOptions();
+  answered = false;
+
+  if (indexNumber < shuffledQuestions.length) {
+    NextQuestion(indexNumber);
+  } else {
+    handleEndGame();
+  }
+}
+
+function resetOptions() {
+  const options = document.getElementsByName("option");
+  options.forEach(option => {
+    option.checked = false;
+    option.labels[0].style.backgroundColor = "";
+  });
+}
+
+function startTimer() {
+  timerValue = 15;
+  const timerElement = document.getElementById("timer");
+  const timerBar = document.getElementById("timer-bar");
+  timerElement.innerText = timerValue;
+  timerElement.style.color = "#007bff";
+  timerBar.style.width = "100%";
+
+  timerInterval = setInterval(() => {
+    timerValue--;
+    timerElement.innerText = timerValue;
+    timerBar.style.width = `${(timerValue / 15) * 100}%`;
+
+    if (timerValue <= 5) {
+      timerElement.style.color = "#dc3545";
+      document.getElementById("beep-sound").play();
+    }
+
+    if (timerValue <= 0) {
+      clearInterval(timerInterval);
+      wrongAttempt++;
+      indexNumber++;
+      questionNumber++;
+      resetOptions();
+      answered = false;
+
+      if (indexNumber < shuffledQuestions.length) {
+        NextQuestion(indexNumber);
+      } else {
+        handleEndGame();
+      }
+    }
+  }, 1000);
+}
+
+function resetTimer() {
+  clearInterval(timerInterval);
+  document.getElementById("timer").innerText = 15;
+  document.getElementById("timer-bar").style.width = "100%";
+}
+
+function handleEndGame() {
+  clearInterval(timerInterval);
+  bgMusic.pause();
+  bgMusic.currentTime = 0;
+
+  // Hitung persentase dari total skor maksimal
+  const maxScore = selectedQuestionCount * scorePerQuestion;
+  const scorePercent = (playerScore / maxScore) * 100;
+
+  let remarks = "";
+  let remarkColor = "";
+
+  if (scorePercent <= 40) {
+    remarks = "Perlu Banyak Belajar 😟";
+    remarkColor = "red";
+  } else if (scorePercent <= 70) {
+    remarks = "Cukup Bagus, Bisa Lebih Baik! 😊";
+    remarkColor = "orange";
+  } else {
+    remarks = "Luar Biasa! 🎉";
+    remarkColor = "green";
+  }
+
+  document.getElementById("display-name").innerText = playerName;
+  document.getElementById("wrong-answers").innerText = wrongAttempt;
+  document.getElementById("right-answers").innerText = playerScore / scorePerQuestion; // jumlah soal benar
+  document.getElementById("grade-percentage").innerText = scorePercent.toFixed(2);
+  document.getElementById("remarks").innerText = remarks;
+  document.getElementById("remarks").style.color = remarkColor;
+
+  document.getElementById("quiz-container").style.display = "none";
+  document.getElementById("score-modal").style.display = "flex";
+}
+
+function restartQuiz() {
+  document.getElementById("score-modal").style.display = "none";
+  document.getElementById("quiz-container").style.display = "flex";
+  resetGame();
+  bgMusic.play();
+}
+
+function goToMenu() {
+  document.getElementById("score-modal").style.display = "none";
+  document.getElementById("start-page").style.display = "flex";
+  resetGame();
+  bgMusic.pause();
+  bgMusic.currentTime = 0;
+}
+
+function resetGame() {
+  playerScore = 0;
+  wrongAttempt = 0;
+  indexNumber = 0;
+  questionNumber = 1;
+  answered = false;
+  document.getElementById("progress-bar").style.width = "0%";
+}
