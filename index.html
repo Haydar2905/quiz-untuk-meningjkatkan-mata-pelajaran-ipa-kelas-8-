@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>QUIZ UNTUK MENINGKATKAN PEMAHAMAN MATA PELAJARAN IPA KELAS 8 BERBASIS WEB</title>
+    <link rel="stylesheet" href="index.css" />    
+  </head>
+  <body>
+    <!-- Start Page -->
+    <div class="start-container" id="start-page">
+      <h1>Selamat Datang di Quiz untuk meningkatkan pemahaman mata pelajaran IPA berbasis web</h1>
+      <input type="text" id="player-name" placeholder="Masukkan Nama Kamu" />
+      <select id="question-count">
+        <option value="10">10 Soal</option>
+        <option value="15" selected>15 Soal</option>
+        <option value="20">20 Soal</option>
+      </select>
+      <button onclick="startQuiz()">Mulai</button>
+    </div>
+
+    <!-- Quiz Page -->
+    <main id="quiz-container" style="display: none">
+      <div class="progress-container">
+        <div id="progress-bar"></div>
+      </div>
+
+      <div class="timer-container"><span id="timer">15</span> detik</div>
+      <div class="timer-progress-container">
+        <div id="timer-bar"></div>
+      </div>
+
+      <div class="game-quiz-container">
+        <div class="game-details-container">
+          <h3 id="player-display">Pemain:</h3>
+          <h3>Skor: <span id="player-score">0</span></h3>
+          <h3>Soal ke-<span id="question-number">1</span></h3>
+        </div>
+        <div class="game-question-container">
+          <h1 id="display-question">Soal akan tampil di sini</h1>
+        </div>
+        <div class="game-options-container">
+          <span><input type="radio" name="option" id="option-one" value="optionA" onclick="selectOption('optionA')" /><label for="option-one" id="option-one-label">A</label></span>
+          <span><input type="radio" name="option" id="option-two" value="optionB" onclick="selectOption('optionB')" /><label for="option-two" id="option-two-label">B</label></span>
+          <span><input type="radio" name="option" id="option-three" value="optionC" onclick="selectOption('optionC')" /><label for="option-three" id="option-three-label">C</label></span>
+          <span><input type="radio" name="option" id="option-four" value="optionD" onclick="selectOption('optionD')" /><label for="option-four" id="option-four-label">D</label></span>
+        </div>
+        <div class="next-button-container">
+          <button onclick="handleNextQuestion()">Selanjutnya</button>
+        </div>
+      </div>
+    </main>
+
+    <!-- Score Modal -->
+    <div class="modal-container" id="score-modal">
+      <div class="modal-content-container">
+        <h1>Hasil Kuis</h1>
+        <p id="display-name">Pemain: -</p>
+        <div class="grade-details">
+          <p>Benar: <span id="right-answers">0</span></p>
+          <p>Salah: <span id="wrong-answers">0</span></p>
+          <p>Nilai: <span id="grade-percentage">0</span>%</p>
+          <p id="remarks">Penilaian</p>
+        </div>
+        <div class="modal-button-container">
+          <button onclick="restartQuiz()">Main Lagi</button>
+          <button onclick="goToMenu()">Menu Awal</button>
+        </div>
+      </div>
+    </div>
+
+    <audio id="beep-sound" src="https://www.soundjay.com/button/beep-07.wav" preload="auto"></audio>
+    <audio id="background-music" src="https://www.bensound.com/bensound-music/bensound-sunny.mp3" autoplay loop></audio>
+
+    <script src="index.js"></script>
+  </body>
+</html>
